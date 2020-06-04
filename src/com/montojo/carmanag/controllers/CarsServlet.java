@@ -33,7 +33,6 @@ public class CarsServlet extends HttpServlet {
             dispatcher.forward(req, resp);
 
         } else {
-//            resp.sendRedirect("/cars.jsp");
             String carsaction = req.getParameter("carsaction");
 
             if (carsaction != null) {

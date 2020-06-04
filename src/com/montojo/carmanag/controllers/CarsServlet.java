@@ -37,6 +37,10 @@ public class CarsServlet extends HttpServlet {
 
             if (carsaction != null) {
                 switch (carsaction) {
+                    case "newcar":
+                        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/newcarform.jsp");
+                        requestDispatcher.forward(req,resp);
+                        break;
                     default:
                         showMainContent(req, resp);
                 }

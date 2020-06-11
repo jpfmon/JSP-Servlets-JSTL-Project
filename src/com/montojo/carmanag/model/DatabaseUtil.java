@@ -312,4 +312,9 @@ public class DatabaseUtil {
         }
         return carsList;
     }
+
+    public void saveNewCar(Car carTemp) {
+        
+
+    }
 }

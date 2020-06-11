@@ -21,25 +21,25 @@
             <td>
                 Full Name:
             </td>
-            <td><input type="text" name="fullName"></td>
+            <td><input type="text" name="fullName" required></td>
         </tr>
         <tr>
             <td>
                 Id Card Number:
             </td>
-            <td><input type="text" name="idCard"></td>
+            <td><input type="text" name="idCard" required></td>
         </tr>
         <tr>
             <td>
                 Phone Number:
             </td>
-            <td><input type="text" name="phoneNumber"></td>
+            <td><input type="text" name="phoneNumber" required></td>
         </tr>
         <tr>
             <td>
                 Email:
             </td>
-            <td><input type="email" name="email"></td>
+            <td><input type="email" name="email" required></td>
         </tr>
         <tr>
             <td><input type="submit" value="Save"></td>

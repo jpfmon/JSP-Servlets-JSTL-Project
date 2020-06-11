@@ -38,8 +38,31 @@ public class CarsServlet extends HttpServlet {
             if (carsaction != null) {
                 switch (carsaction) {
                     case "newcar":
+                        List<Owner> ownerList;
+                        ownerList = databaseUtil.getOwners();
+                        req.setAttribute("ownersList",ownerList);
                         RequestDispatcher requestDispatcher = req.getRequestDispatcher("/newcarform.jsp");
                         requestDispatcher.forward(req,resp);
+                        break;
+                    case "addthis":
+                        System.out.println("Adding this new car");
+                        int ownerId = 0;
+                        String brand;
+                        String model;
+                        try {
+                            ownerId = Integer.parseInt(req.getParameter("ownerId"));
+                        }catch (Exception e){
+                            System.out.println("Beautiful exception parsing in save page of new car");
+                            resp.sendRedirect("/cars?error=noSave");
+                            break;
+                        }
+                        brand  = req.getParameter("brand");
+                        model  = req.getParameter("model");
+
+                        System.out.println("New car. Owner id: " + ownerId + " | Brand: " + brand + " | Model: " + model);
+                        Car carTemp = new Car(ownerId,brand,model);
+                        saveNewCar(carTemp);
+                        resp.sendRedirect("/cars");
                         break;
                     default:
                         showMainContent(req, resp);
@@ -48,6 +71,14 @@ public class CarsServlet extends HttpServlet {
                 showMainContent(req, resp);
             }
         }
+    }
+
+    private void saveNewCar(Car carTemp) {
+
+        databaseUtil.saveNewCar(carTemp);
+        /**
+         * Write logic in databaseUtil to save new car
+         */
     }
 
     private void showMainContent(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

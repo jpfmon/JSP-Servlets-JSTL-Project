@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Juan
@@ -14,38 +15,38 @@
 <h1>PLEASE, INTRODUCE DETAILS OF NEW CAR</h1>
 <hr>
 <table>
-    <form action="owners" method="get">
-        <input type="hidden" name="ownersaction" value="addthis">
+    <form action="/cars" method="get">
+        <input type="hidden" name="carsaction" value="addthis">
         <tbody>
         <tr>
             <td>
-                Full Name:
+                Owner:
             </td>
-            <td><input type="text" name="fullName"></td>
+            <td>
+                <select name="ownerId" required>
+                    <c:forEach var="ownerTemp" items="${ownersList}">
+                        <option value="${ownerTemp.id}">${ownerTemp.fullName}</option>
+                    </c:forEach>
+                </select>
+            </td>
         </tr>
         <tr>
             <td>
-                Id Card Number:
+                Brand:
             </td>
-            <td><input type="text" name="idCard"></td>
+            <td><input type="text" name="brand" required></td>
         </tr>
         <tr>
             <td>
-                Phone Number:
+                Model:
             </td>
-            <td><input type="text" name="phoneNumber"></td>
-        </tr>
-        <tr>
-            <td>
-                Email:
-            </td>
-            <td><input type="email" name="email"></td>
+            <td><input type="text" name="model" required></td>
         </tr>
         <tr>
             <td><input type="submit" value="Save"></td>
     </form>
     <td>
-        <button onclick="location.href = '/owners';">Cancel</button>
+        <button onclick="location.href = '/cars';">Cancel</button>
     </td>
     </tr>
     </tbody>

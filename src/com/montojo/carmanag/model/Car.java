@@ -18,6 +18,20 @@ public class Car {
         this.services = new ArrayList<>();
     }
 
+    public Car(int owner_id, String brand, String model, ArrayList<Services> services) {
+        this.owner_id = owner_id;
+        this.brand = brand;
+        this.model = model;
+        this.services = services;
+    }
+
+    public Car(int owner_id, String brand, String model) {
+        this.owner_id = owner_id;
+        this.brand = brand;
+        this.model = model;
+        this.services = new ArrayList<>();
+    }
+
     public int getId() {
         return id;
     }

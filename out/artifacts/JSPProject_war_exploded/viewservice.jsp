@@ -15,52 +15,47 @@
 <h1>VIEW SERVICE</h1>
 <hr>
 <table>
-    <form action="/services" method="get">
-        <input type="hidden" name="serviceaction" value="updateThis">
-        <input type="hidden" name="serviceId" value="${viewedService.id}">
         <tbody>
         <tr>
             <td>
                 Service id:
             </td>
-            <td><input type="text" name="serviceId" value="${viewedService.id}"></td>
+        <td>${viewedService.id}</td>
         </tr>
         <tr>
             <td>
                 Name:
             </td>
-            <td><input type="text" name="ownerName" value="${viewedService.name}"></td>
+            <td>${viewedService.name}</td>
         </tr>
         <tr>
             <td>
                 Date:
             </td>
-            <td><input type="text" name="serviceDate" value="${viewedService.date}"></td>
+        <td>${viewedService.date}</td>
         </tr>
         <tr>
             <td>
                 Car Id:
             </td>
-            <td><input type="text" name="carId" value="${viewedService.carId}"></td>
+            <td>${viewedService.carId}</td>
             <td><a href="/cars?carsaction=viewCar&carId=${viewedService.carId}">Go to this car</a></td>
         </tr>
         <tr>
             <td>
                 Notes:
             </td>
-            <td><input type="text" name="serviceNotes" value="${viewedService.notes}"></td>
+        <td>${viewedService.notes}</td>
         </tr>
         <tr>
             <td>
                 Price:
             </td>
-            <td><input type="text" name="servicePrice" value="${viewedService.price}"></td>
+        <td>${viewedService.price}</td>
         </tr>
         <tr>
-            <td><input type="submit" value="Save"></td>
-    </form>
     <td>
-        <button onclick="location.href = '/services';">Cancel</button>
+        <button onclick="location.href = '/services';">Return</button>
     </td>
     </tr>
     </tbody>

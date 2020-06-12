@@ -469,4 +469,27 @@ public class DatabaseUtil {
             }
         }
     }
+
+    public void updateCar(Car updatedCar) {
+
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+
+        try {
+            connection = dataSource.getConnection();
+            String sql = "update  car set owner_id = ?, brand = ?, model = ? where id = ?";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, updatedCar.getOwner_id());
+            preparedStatement.setString(2, updatedCar.getBrand());
+            preparedStatement.setString(3, updatedCar.getModel());
+            preparedStatement.setInt(4, updatedCar.getId());
+
+            preparedStatement.execute();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close(connection, preparedStatement, null);
+        }
+    }
 }

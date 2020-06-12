@@ -15,46 +15,41 @@
 <h1>VIEW CAR</h1>
 <hr>
 <table>
-    <form action="/cars" method="get">
-        <input type="hidden" name="carsaction" value="updateThis">
-        <input type="hidden" name="carId" value="${viewedCar.id}">
         <tbody>
         <tr>
             <td>
                 Car id:
             </td>
-            <td><input type="text" name="carId" value="${viewedCar.id}"></td>
+            <td>${viewedCar.id}</td>
         </tr>
         <tr>
             <td>
                 Owner:
             </td>
-            <td><input type="text" name="ownerId" value="${viewedCar.owner_id}"></td>
+            <td>${viewedCar.owner_id}</td>
             <td><a href="/owners?ownersaction=viewOwner&ownerId=${viewedCar.owner_id}">Go to this owner</a></td>
         </tr>
         <tr>
             <td>
                 Brand:
             </td>
-            <td><input type="text" name="brand" value="${viewedCar.brand}"></td>
+            <td>${viewedCar.brand}</td>
         </tr>
         <tr>
             <td>
                 Model:
             </td>
-            <td><input type="text" name="model" value="${viewedCar.model}"></td>
+            <td>${viewedCar.model}</td>
         </tr>
         <tr>
             <td>
                 Plate Number:
             </td>
-            <td><input type="text" name="plate" required></td>
+            <td>Here goes the plate number</td>
         </tr>
         <tr>
-            <td><input type="submit" value="Save"></td>
-    </form>
     <td>
-        <button onclick="location.href = '/cars';">Cancel</button>
+        <button onclick="location.href = '/cars';">Return</button>
     </td>
     </tr>
     </tbody>

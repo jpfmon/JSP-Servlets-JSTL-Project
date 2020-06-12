@@ -83,6 +83,23 @@ public class CarsServlet extends HttpServlet {
                         /**
                          * Logic to update the record
                          */
+                        System.out.println("Request to update this car");
+                        int updatedCarId = 0;
+                        int updatedOwnerId = 0;
+                        String updateCarBrand = req.getParameter("brand");
+                        String updateCarModel = req.getParameter("model");
+                        try {
+                            updatedCarId = Integer.parseInt(req.getParameter("carId"));
+                            updatedOwnerId = Integer.parseInt(req.getParameter("ownerId"));
+                        }catch (Exception e){
+                            System.out.println("Beautiful exception parsing in car update page");
+                            resp.sendRedirect("/owners?error=noUpdate");
+                            break;
+                        }
+
+                        Car updatedCar = new Car(updatedCarId,updatedOwnerId,updateCarBrand,updateCarModel);
+                        updateCar(updatedCar);
+                        resp.sendRedirect("/cars");
                         break;
                     default:
                         showMainContent(req, resp);
@@ -91,6 +108,10 @@ public class CarsServlet extends HttpServlet {
                 showMainContent(req, resp);
             }
         }
+    }
+
+    private void updateCar(Car updatedCar) {
+        databaseUtil.updateCar(updatedCar);
     }
 
     private void deleteCar(int deleteCarId) {

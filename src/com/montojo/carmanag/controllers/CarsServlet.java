@@ -79,6 +79,11 @@ public class CarsServlet extends HttpServlet {
                         deleteCar(deleteCarId);
                         resp.sendRedirect("/cars");
                         break;
+                    case "updateThis":
+                        /**
+                         * Logic to update the record
+                         */
+                        break;
                     default:
                         showMainContent(req, resp);
                 }

@@ -80,7 +80,7 @@ public class Car {
         this.model = model;
     }
 
-    public void newService(String name,String date, String note, Long price){
+    public void newService(String name, String date, String note, Float price){
         int newindex = this.services.size();
         services.add(new Services(newindex,name,this.id,date,note,price));
         System.out.println("New service added");

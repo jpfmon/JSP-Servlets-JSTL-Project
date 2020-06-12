@@ -9,10 +9,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>View Car</title>
+    <title>View Service</title>
 </head>
 <body>
-<h1>VIEW CAR</h1>
+<h1>VIEW SERVICE</h1>
 <hr>
 <table>
     <form action="/services" method="get">
@@ -66,7 +66,7 @@
     </tbody>
 </table>
 <form action="/services" method="get"
-      onsubmit="return confirm('Do you really want to delete this car and its services?');">
+      onsubmit="return confirm('Do you really want to delete this service?');">
     <input type="hidden" name="serviceaction" value="deleteThis">
     <input type="hidden" name="serviceId" value="${viewedService.id}">
     <input type="submit" value="Delete Service" style="color:red;"/>

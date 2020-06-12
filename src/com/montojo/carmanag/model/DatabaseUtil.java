@@ -63,7 +63,7 @@ public class DatabaseUtil {
                 String date = resultSet.getString("date");
                 int carId = resultSet.getInt("car_id");
                 String notes = resultSet.getString("notes");
-                long price = resultSet.getLong("price");
+                Float price = resultSet.getFloat("price");
 
                 Services serviceTemp = new Services(id, name, carId, date, notes, price);
                 servicesList.add(serviceTemp);
@@ -78,7 +78,6 @@ public class DatabaseUtil {
     }
 
     public List<Car> getCars() {
-//        System.out.println("In getCars() of DatabaseUtil");
         List<Car> carsList = new ArrayList<>();
         Connection connection = null;
         Statement statement = null;
@@ -266,7 +265,7 @@ public class DatabaseUtil {
                 String serviceDate = resultSet.getString("date");
                 int serviceCarId = resultSet.getInt("car_id");
                 String serviceNotes = resultSet.getString("notes");
-                Long servicePrice = resultSet.getLong("price");
+                Float servicePrice = resultSet.getFloat("price");
 
                 tempService = new Services(serviceId, serviceName, serviceCarId, serviceDate, serviceNotes, servicePrice);
                 System.out.println(tempService.toString());
@@ -413,8 +412,8 @@ public class DatabaseUtil {
                 String date = resultSet.getString("date");
                 int carId = resultSet.getInt("car_id");
                 String notes = resultSet.getString("notes");
-                long price= resultSet.getLong("price");
-                retrievedService = new Services(id,name,carId,date,notes,price);
+                Float price = resultSet.getFloat("price");
+                retrievedService = new Services(id, name, carId, date, notes, price);
                 System.out.println(retrievedService.toString());
             }
         } catch (SQLException e) {
@@ -423,5 +422,51 @@ public class DatabaseUtil {
             close(connection, preparedStatement, resultSet);
         }
         return retrievedService;
+    }
+
+    public void saveNewService(Services newService) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        try {
+            connection = dataSource.getConnection();
+            String sql = "insert into service (name,date,car_id,notes,price) values (?,?,?,?,?)";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, newService.getName());
+            preparedStatement.setString(2, newService.getDate());
+            preparedStatement.setInt(3, newService.getCarId());
+            preparedStatement.setString(4, newService.getNotes());
+            preparedStatement.setFloat(5, newService.getPrice());
+            preparedStatement.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close(connection, preparedStatement, null);
+        }
+    }
+
+    public void deleteService(int deleteServiceId) {
+        Connection connection = null;
+        PreparedStatement preparedStatementServices = null;
+
+        String sqlServices = "delete from service where id = ?";
+
+        try {
+            connection = dataSource.getConnection();
+            preparedStatementServices = connection.prepareStatement(sqlServices);
+
+            preparedStatementServices.setInt(1, deleteServiceId);
+            preparedStatementServices.execute();
+            System.out.println("Deleting service succeeded!!!");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                connection.close();
+                preparedStatementServices.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

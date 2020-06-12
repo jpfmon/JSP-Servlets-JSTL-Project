@@ -45,6 +45,51 @@ public class ServicesServlet extends HttpServlet {
                         dispatcherViewOwner.forward(req, resp);
                         break;
                     case "newservice":
+                        System.out.println("Send to new service form");
+
+                        List<Car> carsList;
+                        carsList = databaseUtil.getCars();
+                        req.setAttribute("carsList", carsList);
+
+                        RequestDispatcher dispatcherNewOwner = req.getRequestDispatcher("/newserviceform.jsp");
+                        dispatcherNewOwner.forward(req, resp);
+                        break;
+                    case "addThis":
+                        System.out.println("Adding this new service");
+                        int carId = 0;
+                        String name;
+                        String date;
+                        String notes;
+                        Float price;
+                        try {
+                            carId = Integer.parseInt(req.getParameter("carId"));
+                            System.out.println("parsing carId correct");
+                            price = Float.parseFloat(req.getParameter("price"));
+                            System.out.println("parsing price correct");
+                        } catch (Exception e) {
+                            System.out.println("Beautiful exception parsing in save page of new service");
+                            resp.sendRedirect("/services?error=noSave");
+                            break;
+                        }
+                        name = req.getParameter("name");
+                        date = req.getParameter("date");
+                        notes = req.getParameter("notes");
+
+                        Services newService = new Services(name, carId, date, notes, price);
+                        System.out.println(newService.toString());
+                        saveNewService(newService);
+                        resp.sendRedirect("/services");
+                        break;
+                    case "deleteThis":
+                        int deleteServiceId = Integer.parseInt(req.getParameter("serviceId"));
+                        System.out.println("You want to delete service " + deleteServiceId);
+                        deleteService(deleteServiceId);
+                        resp.sendRedirect("/services");
+                        break;
+                    case "updateThis":
+                        /**
+                         * Logic to update the record
+                         */
                         break;
                     default:
                         showMainContent(req, resp);
@@ -53,6 +98,14 @@ public class ServicesServlet extends HttpServlet {
                 showMainContent(req, resp);
             }
         }
+    }
+
+    private void deleteService(int deleteServiceId) {
+        databaseUtil.deleteService(deleteServiceId);
+    }
+
+    private void saveNewService(Services newService) {
+        databaseUtil.saveNewService(newService);
     }
 
     private Services retrieveService(int serviceId) {

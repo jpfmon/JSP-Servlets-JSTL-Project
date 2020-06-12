@@ -7,10 +7,10 @@ public class Services {
     private int carId;
     private String date;
     private String notes;
-    private Long price;
+    private Float price;
 
 
-    public Services(int id, String name, int carId, String date, String notes, Long price) {
+    public Services(int id, String name, int carId, String date, String notes, Float price) {
         this.id = id;
         this.name = name;
         this.carId = carId;
@@ -19,7 +19,13 @@ public class Services {
         this.price = price;
     }
 
-
+    public Services(String name, int carId, String date, String notes, Float price) {
+        this.name = name;
+        this.carId = carId;
+        this.date = date;
+        this.notes = notes;
+        this.price = price;
+    }
 
     public int getId() {
         return id;
@@ -53,13 +59,10 @@ public class Services {
         this.notes = notes;
     }
 
-    public long getPrice() {
+    public Float getPrice() {
         return price;
     }
 
-    public void setPrice(long price) {
-        this.price = price;
-    }
     public int getCarId() {
         return carId;
     }
@@ -68,7 +71,7 @@ public class Services {
         this.carId = carId;
     }
 
-    public void setPrice(Long price) {
+    public void setPrice(Float price) {
         this.price = price;
     }
 

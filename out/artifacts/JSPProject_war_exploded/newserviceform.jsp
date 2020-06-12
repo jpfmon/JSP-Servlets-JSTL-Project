@@ -9,52 +9,57 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>View Service</title>
+    <title>New Service</title>
 </head>
 <body>
-<h1>VIEW SERVICE</h1>
+<h1>NEW SERVICE</h1>
 <hr>
 <table>
     <form action="/services" method="get">
-        <input type="hidden" name="serviceaction" value="updateThis">
+        <input type="hidden" name="serviceaction" value="addThis">
         <input type="hidden" name="serviceId" value="${viewedService.id}">
         <tbody>
-        <tr>
-            <td>
-                Service id:
-            </td>
-            <td><input type="text" name="serviceId" value="${viewedService.id}"></td>
-        </tr>
+<%--        <tr>--%>
+<%--            <td>--%>
+<%--                Service id:--%>
+<%--            </td>--%>
+<%--            <td><input type="text" name="serviceId" value="${viewedService.id}"></td>--%>
+<%--        </tr>--%>
         <tr>
             <td>
                 Name:
             </td>
-            <td><input type="text" name="ownerName" value="${viewedService.name}"></td>
+            <td><input type="text" name="name" value="${viewedService.name}"></td>
         </tr>
         <tr>
             <td>
                 Date:
             </td>
-            <td><input type="text" name="serviceDate" value="${viewedService.date}"></td>
+            <td><input type="text" name="date" value="${viewedService.date}"></td>
         </tr>
         <tr>
             <td>
                 Car Id:
             </td>
-            <td><input type="text" name="carId" value="${viewedService.carId}"></td>
-            <td><a href="/cars?carsaction=viewCar&carId=${viewedService.carId}">Go to this car</a></td>
+            <td>
+            <select name="carId" required>
+                <c:forEach var="cartemp" items="${carsList}">
+                    <option value="${cartemp.id}">${cartemp.id} ${cartemp.brand} ${cartemp.model}</option>
+                </c:forEach>
+            </select>
+            </td>
         </tr>
         <tr>
             <td>
                 Notes:
             </td>
-            <td><input type="text" name="serviceNotes" value="${viewedService.notes}"></td>
+            <td><input type="text" name="notes" value="${viewedService.notes}"></td>
         </tr>
         <tr>
             <td>
                 Price:
             </td>
-            <td><input type="text" name="servicePrice" value="${viewedService.price}"></td>
+            <td><input type="text" name="price" value="${viewedService.price}"></td>
         </tr>
         <tr>
             <td><input type="submit" value="Save"></td>
@@ -66,7 +71,7 @@
     </tbody>
 </table>
 <form action="/services" method="get"
-      onsubmit="return confirm('Do you really want to delete this service?');">
+      onsubmit="return confirm('Do you really want to delete this car and its services?');">
     <input type="hidden" name="serviceaction" value="deleteThis">
     <input type="hidden" name="serviceId" value="${viewedService.id}">
     <input type="submit" value="Delete Service" style="color:red;"/>

@@ -58,7 +58,12 @@
     </td>
     </tr>
     </tbody>
-
 </table>
+<form action="/cars" method="get"
+      onsubmit="return confirm('Do you really want to delete this car and its services?');">
+    <input type="hidden" name="carsaction" value="deleteThis">
+    <input type="hidden" name="carId" value="${viewedCar.id}">
+    <input type="submit" value="Delete Car" style="color:red;"/>
+</form>
 </body>
 </html>

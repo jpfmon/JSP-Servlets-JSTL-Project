@@ -360,4 +360,38 @@ public class DatabaseUtil {
         return retrievedCar;
 
     }
+
+    public void deleteCar(int deleteCarId) {
+        Connection connection = null;
+        PreparedStatement preparedStatementServices = null;
+        PreparedStatement preparedStatementCars = null;
+
+        String sqlServices = "delete from service where car_id = ?";
+        String sqlCars = "delete from car where id = ?";
+
+        try {
+            connection = dataSource.getConnection();
+            preparedStatementServices = connection.prepareStatement(sqlServices);
+            preparedStatementCars = connection.prepareStatement(sqlCars);
+
+            preparedStatementServices.setInt(1, deleteCarId);
+            preparedStatementCars.setInt(1, deleteCarId);
+
+            preparedStatementServices.execute();
+            preparedStatementCars.execute();
+
+            System.out.println("Deleting records on all two tables succeeded!!!");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                connection.close();
+                preparedStatementServices.close();
+                preparedStatementCars.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }

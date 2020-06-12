@@ -73,6 +73,12 @@ public class CarsServlet extends HttpServlet {
                         RequestDispatcher dispatcherViewOwner = req.getRequestDispatcher("/viewcar.jsp");
                         dispatcherViewOwner.forward(req, resp);
                         break;
+                    case "deleteThis":
+                        int deleteCarId = Integer.parseInt(req.getParameter("carId"));
+                        System.out.println("You want to delete car " + deleteCarId);
+                        deleteCar(deleteCarId);
+                        resp.sendRedirect("/cars");
+                        break;
                     default:
                         showMainContent(req, resp);
                 }
@@ -80,6 +86,10 @@ public class CarsServlet extends HttpServlet {
                 showMainContent(req, resp);
             }
         }
+    }
+
+    private void deleteCar(int deleteCarId) {
+        databaseUtil.deleteCar(deleteCarId);
     }
 
     private Car retrieveCar(int carId) {

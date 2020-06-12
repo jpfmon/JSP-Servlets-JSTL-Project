@@ -358,7 +358,6 @@ public class DatabaseUtil {
             close(connection, preparedStatement, resultSet);
         }
         return retrievedCar;
-
     }
 
     public void deleteCar(int deleteCarId) {
@@ -393,5 +392,36 @@ public class DatabaseUtil {
                 e.printStackTrace();
             }
         }
+    }
+
+    public Services getService(int serviceId) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        Services retrievedService = null;
+        try {
+            connection = dataSource.getConnection();
+            String sql = "select * from service where id=?";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, serviceId);
+
+            resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String name = resultSet.getString("name");
+                String date = resultSet.getString("date");
+                int carId = resultSet.getInt("car_id");
+                String notes = resultSet.getString("notes");
+                long price= resultSet.getLong("price");
+                retrievedService = new Services(id,name,carId,date,notes,price);
+                System.out.println(retrievedService.toString());
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close(connection, preparedStatement, resultSet);
+        }
+        return retrievedService;
     }
 }

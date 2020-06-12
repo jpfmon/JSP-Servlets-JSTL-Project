@@ -116,7 +116,7 @@
         </div>
     </div>
     <div class="box">
-        <h3><a href="services.jsp">Manage Services</a></h3><br><br>
+        <h3><a href="services">Manage Services</a></h3><br><br>
         <div class="listsBox">
             <table class="lists">
                 <thead class="head">

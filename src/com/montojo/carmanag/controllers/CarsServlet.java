@@ -40,9 +40,9 @@ public class CarsServlet extends HttpServlet {
                     case "newcar":
                         List<Owner> ownerList;
                         ownerList = databaseUtil.getOwners();
-                        req.setAttribute("ownersList",ownerList);
+                        req.setAttribute("ownersList", ownerList);
                         RequestDispatcher requestDispatcher = req.getRequestDispatcher("/newcarform.jsp");
-                        requestDispatcher.forward(req,resp);
+                        requestDispatcher.forward(req, resp);
                         break;
                     case "addthis":
                         System.out.println("Adding this new car");
@@ -51,18 +51,27 @@ public class CarsServlet extends HttpServlet {
                         String model;
                         try {
                             ownerId = Integer.parseInt(req.getParameter("ownerId"));
-                        }catch (Exception e){
+                        } catch (Exception e) {
                             System.out.println("Beautiful exception parsing in save page of new car");
                             resp.sendRedirect("/cars?error=noSave");
                             break;
                         }
-                        brand  = req.getParameter("brand");
-                        model  = req.getParameter("model");
+                        brand = req.getParameter("brand");
+                        model = req.getParameter("model");
 
                         System.out.println("New car. Owner id: " + ownerId + " | Brand: " + brand + " | Model: " + model);
-                        Car carTemp = new Car(ownerId,brand,model);
+                        Car carTemp = new Car(ownerId, brand, model);
                         saveNewCar(carTemp);
                         resp.sendRedirect("/cars");
+                        break;
+                    case "viewCar":
+                        int carId = Integer.parseInt(req.getParameter("carId"));
+                        System.out.println("Id of car to view: " + carId);
+                        Car viewedCar = retrieveCar(carId);
+
+                        req.setAttribute("viewedCar", viewedCar);
+                        RequestDispatcher dispatcherViewOwner = req.getRequestDispatcher("/viewcar.jsp");
+                        dispatcherViewOwner.forward(req, resp);
                         break;
                     default:
                         showMainContent(req, resp);
@@ -73,19 +82,19 @@ public class CarsServlet extends HttpServlet {
         }
     }
 
-    private void saveNewCar(Car carTemp) {
+    private Car retrieveCar(int carId) {
+        return databaseUtil.getCar(carId);
+    }
 
+    private void saveNewCar(Car carTemp) {
         databaseUtil.saveNewCar(carTemp);
-        /**
-         * Write logic in databaseUtil to save new car
-         */
     }
 
     private void showMainContent(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        if(req.getParameter("error")!=null){
+        if (req.getParameter("error") != null) {
             String message = req.getParameter("error") + " due to wrong data type";
-            req.setAttribute("error",message);
+            req.setAttribute("error", message);
         }
         List<Car> carsList;
         carsList = listCars(); //retrieve owners from database

@@ -73,8 +73,8 @@
             </thead>
             <tbody>
             <c:forEach var="cartemp" items="${carsList}">
-
                 <tr>
+                <td><a href="/cars?carsaction=viewCar&carId=${cartemp.id}">View this car</a></td>
                 <td>${cartemp.id}</td>
                 <td>${cartemp.brand}</td>
                 <td>${cartemp.model}</td>

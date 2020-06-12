@@ -330,4 +330,34 @@ public class DatabaseUtil {
             close(connection, preparedStatement, null);
         }
     }
+
+    public Car getCar(int carId) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        Car retrievedCar = null;
+        try {
+            connection = dataSource.getConnection();
+            String sql = "select * from car where id=?";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, carId);
+
+            resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                int ownerId = resultSet.getInt("owner_id");
+                String brand = resultSet.getString("brand");
+                String model = resultSet.getString("model");
+                System.out.println("Retrieved Car. Id: " + id + " Owner id: " + ownerId + " Brand: " + brand + " Model: " + model);
+                retrievedCar = new Car(id, ownerId, brand, model);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close(connection, preparedStatement, resultSet);
+        }
+        return retrievedCar;
+
+    }
 }

@@ -43,6 +43,12 @@
             <td><input type="text" name="model" required></td>
         </tr>
         <tr>
+            <td>
+                Plate Number:
+            </td>
+            <td><input type="text" name="plate" required></td>
+        </tr>
+        <tr>
             <td><input type="submit" value="Save"></td>
     </form>
     <td>

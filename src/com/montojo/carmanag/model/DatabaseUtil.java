@@ -17,7 +17,6 @@ public class DatabaseUtil {
         this.dataSource = dataSource;
     }
 
-
     public List<Owner> getOwners() {
         List<Owner> ownersList = new ArrayList<>();
         Connection connection = null;
@@ -35,7 +34,6 @@ public class DatabaseUtil {
                 int phone = resultSet.getInt("phone");
                 String email = resultSet.getString("email");
                 Owner ownerTemp = new Owner(id, fullName, idCard, phone, email);
-//                System.out.println(ownerTemp.toString());
                 ownersList.add(ownerTemp);
             }
         } catch (SQLException e) {
@@ -67,7 +65,6 @@ public class DatabaseUtil {
 
                 Services serviceTemp = new Services(id, name, carId, date, notes, price);
                 servicesList.add(serviceTemp);
-//                System.out.println(serviceTemp.toString());
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -93,7 +90,6 @@ public class DatabaseUtil {
                 String brand = resultSet.getString("brand");
                 String model = resultSet.getString("model");
                 Car carTemp = new Car(id, ownerId, brand, model);
-//                System.out.println(carTemp.toString());
                 carsList.add(carTemp);
             }
         } catch (SQLException e) {
@@ -171,12 +167,6 @@ public class DatabaseUtil {
     }
 
     public void updateOwner(Owner updatedOwner) {
-
-//        int id = updatedOwner.getId();
-//        String fullName = updatedOwner.getFullName();
-//        int idCard = updatedOwner.getIdCardNumber();
-//        int phone = updatedOwner.getPhone();
-//        String email = updatedOwner.getEmail();
 
         Connection connection = null;
         PreparedStatement preparedStatement = null;

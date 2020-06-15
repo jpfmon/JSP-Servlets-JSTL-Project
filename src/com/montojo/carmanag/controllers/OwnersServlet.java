@@ -4,7 +4,6 @@ import com.montojo.carmanag.model.Car;
 import com.montojo.carmanag.model.DatabaseUtil;
 import com.montojo.carmanag.model.Owner;
 import com.montojo.carmanag.model.Services;
-import sun.plugin.com.Dispatcher;
 
 
 import javax.servlet.RequestDispatcher;
@@ -48,9 +47,9 @@ public class OwnersServlet extends HttpServlet {
                         int phone = 0;
                         try {
                             idCard = Integer.parseInt(req.getParameter("idCard"));
-                            phone  = Integer.parseInt(req.getParameter("phoneNumber"));
-                        }catch (Exception e){
-                            System.out.println("Beautiful exception parsing in save page");
+                            phone = Integer.parseInt(req.getParameter("phoneNumber"));
+                        } catch (Exception e) {
+                            System.out.println("Exception parsing in save page");
                             resp.sendRedirect("/owners?error=noSave");
                             break;
                         }
@@ -60,7 +59,7 @@ public class OwnersServlet extends HttpServlet {
                         System.out.println("IdCard from form: " + idCard);
                         System.out.println("Phone from form: " + phone);
                         System.out.println("Email from form: " + email);
-                        Owner newOwner = new Owner(newOwnerFullName,idCard,phone,email);
+                        Owner newOwner = new Owner(newOwnerFullName, idCard, phone, email);
                         saveNewOwner(newOwner);
                         resp.sendRedirect("/owners");
                         break;
@@ -72,8 +71,8 @@ public class OwnersServlet extends HttpServlet {
                         ArrayList<Services> servicesList = retrieveOwnerServices(ownerId);
 
                         req.setAttribute("viewOwner", viewOwner);
-                        req.setAttribute("carsList",carsList);
-                        req.setAttribute("servicesList",servicesList);
+                        req.setAttribute("carsList", carsList);
+                        req.setAttribute("servicesList", servicesList);
 
                         RequestDispatcher dispatcherViewOwner = req.getRequestDispatcher("/viewowner.jsp");
                         dispatcherViewOwner.forward(req, resp);
@@ -87,14 +86,14 @@ public class OwnersServlet extends HttpServlet {
                         try {
                             updatedIdCard = Integer.parseInt(req.getParameter("idCard"));
                             updatedPhone = Integer.parseInt(req.getParameter("phoneNumber"));
-                        }catch (Exception e){
+                        } catch (Exception e) {
                             System.out.println("Beautiful exception parsing in update page");
                             resp.sendRedirect("/owners?error=noUpdate");
                             break;
                         }
                         String updatedEmail = req.getParameter("email");
 
-                        Owner updatedOwner = new Owner(updatedOwnerId,updatedOwnerFullName,updatedIdCard,updatedPhone,updatedEmail);
+                        Owner updatedOwner = new Owner(updatedOwnerId, updatedOwnerFullName, updatedIdCard, updatedPhone, updatedEmail);
                         updateOwner(updatedOwner);
                         resp.sendRedirect("/owners");
                         break;
@@ -144,9 +143,9 @@ public class OwnersServlet extends HttpServlet {
 
     private void showMainContent(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        if(req.getParameter("error")!=null){
+        if (req.getParameter("error") != null) {
             String message = req.getParameter("error") + " due to wrong data type";
-            req.setAttribute("error",message);
+            req.setAttribute("error", message);
         }
         List<Owner> ownersList;
         ownersList = listOwners(); //retrieve owners from database
@@ -164,12 +163,10 @@ public class OwnersServlet extends HttpServlet {
         if (databaseUtil == null || loggedIn == null || !loggedIn) {
             return false;
         }
-//        System.out.println("LoggedIn from session y en method checkLog: " + loggedIn);
         return true;
     }
 
     private List<Owner> listOwners() {
-//        System.out.println("Aqui andamos, en listOwners method");
         return databaseUtil.getOwners();
     }
 

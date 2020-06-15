@@ -67,7 +67,7 @@ public class ServicesServlet extends HttpServlet {
                             price = Float.parseFloat(req.getParameter("price"));
                             System.out.println("parsing price correct");
                         } catch (Exception e) {
-                            System.out.println("Beautiful exception parsing in save page of new service");
+                            System.out.println("Exception parsing in save page of new service");
                             resp.sendRedirect("/services?error=noSave");
                             break;
                         }
@@ -150,7 +150,6 @@ public class ServicesServlet extends HttpServlet {
         if (databaseUtil == null || loggedIn == null || !loggedIn) {
             return false;
         }
-//        System.out.println("LoggedIn from session y en method checkLog: " + loggedIn);
         return true;
     }
 }

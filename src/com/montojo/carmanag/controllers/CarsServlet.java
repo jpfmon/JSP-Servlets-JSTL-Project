@@ -92,7 +92,7 @@ public class CarsServlet extends HttpServlet {
                             updatedCarId = Integer.parseInt(req.getParameter("carId"));
                             updatedOwnerId = Integer.parseInt(req.getParameter("ownerId"));
                         }catch (Exception e){
-                            System.out.println("Beautiful exception parsing in car update page");
+                            System.out.println("Exception parsing in car update page");
                             resp.sendRedirect("/owners?error=noUpdate");
                             break;
                         }

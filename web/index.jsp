@@ -24,7 +24,7 @@
 <hr>
 <div>
     <c:set var="logged" value="${sessionScope.login}"/>
-    <p><c:out value="${logged}"/></p>
+<%--    <p><c:out value="${logged}"/></p>--%>
     <p style="color: red">${error}</p>
     <form action="login" method="post">
         <table>

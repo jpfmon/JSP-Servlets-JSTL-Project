@@ -65,6 +65,7 @@
         <table>
             <thead>
             <tr>
+                <td></td>
                 <td>Car id</td>
                 <td>Car brand</td>
                 <td>Car model</td>
@@ -78,13 +79,20 @@
                 <td>${cartemp.id}</td>
                 <td>${cartemp.brand}</td>
                 <td>${cartemp.model}</td>
+
                 <c:forEach var="servtemp" items="${servicesList}">
                     <c:if test="${servtemp.carId == cartemp.id}">
+                        <c:url var="tempLinkSer" value="/services">
+                            <c:param name="serviceaction" value="viewService"/>
+                            <c:param name="serviceId" value="${servtemp.id}"/>
+                        </c:url>
                         <tr>
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td>${servtemp.id} | ${servtemp.name} | ${servtemp.date} | ${servtemp.price} | ${servtemp.notes}</td>
+                        <td></td>
+                        <td><a href="${tempLinkSer}">${servtemp.id}</a> | ${servtemp.name} | ${servtemp.date}
+                            | ${servtemp.price} | ${servtemp.notes}</td>
                     </c:if>
                 </c:forEach>
                 </tr>
@@ -93,33 +101,33 @@
             </tbody>
         </table>
     </div>
-<%--    <div>--%>
-<%--        <h3>Services</h3>--%>
-<%--        <table>--%>
-<%--            <thead>--%>
-<%--            <tr>--%>
-<%--                <td>Service id</td>--%>
-<%--                <td>Service name</td>--%>
-<%--                <td>Service date</td>--%>
-<%--                <td>Car id</td>--%>
-<%--                <td>Notes</td>--%>
-<%--                <td>Price</td>--%>
-<%--            </tr>--%>
-<%--            </thead>--%>
-<%--            <tbody>--%>
-<%--            <c:forEach var="servicetemp" items="${servicesList}">--%>
-<%--                <tr>--%>
-<%--                    <td>${servicetemp.id}</td>--%>
-<%--                    <td>${servicetemp.name}</td>--%>
-<%--                    <td>${servicetemp.date}</td>--%>
-<%--                    <td>${servicetemp.carId}</td>--%>
-<%--                    <td>${servicetemp.notes}</td>--%>
-<%--                    <td>${servicetemp.price}</td>--%>
-<%--                </tr>--%>
-<%--            </c:forEach>--%>
-<%--            </tbody>--%>
-<%--        </table>--%>
-<%--    </div>--%>
-<%--</div>--%>
+    <%--    <div>--%>
+    <%--        <h3>Services</h3>--%>
+    <%--        <table>--%>
+    <%--            <thead>--%>
+    <%--            <tr>--%>
+    <%--                <td>Service id</td>--%>
+    <%--                <td>Service name</td>--%>
+    <%--                <td>Service date</td>--%>
+    <%--                <td>Car id</td>--%>
+    <%--                <td>Notes</td>--%>
+    <%--                <td>Price</td>--%>
+    <%--            </tr>--%>
+    <%--            </thead>--%>
+    <%--            <tbody>--%>
+    <%--            <c:forEach var="servicetemp" items="${servicesList}">--%>
+    <%--                <tr>--%>
+    <%--                    <td>${servicetemp.id}</td>--%>
+    <%--                    <td>${servicetemp.name}</td>--%>
+    <%--                    <td>${servicetemp.date}</td>--%>
+    <%--                    <td>${servicetemp.carId}</td>--%>
+    <%--                    <td>${servicetemp.notes}</td>--%>
+    <%--                    <td>${servicetemp.price}</td>--%>
+    <%--                </tr>--%>
+    <%--            </c:forEach>--%>
+    <%--            </tbody>--%>
+    <%--        </table>--%>
+    <%--    </div>--%>
+    <%--</div>--%>
 </body>
 </html>
